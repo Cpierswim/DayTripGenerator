@@ -56,9 +56,9 @@ def get_entertainment_list():
     list = []
     list.append("Magic Show")
     list.append("Movie")
-    # list.append("Live Show")
-    # list.append("Concert")
-    # list.append("Football Game")
+    list.append("Live Show")
+    list.append("Concert")
+    list.append("Football Game")
     return list
 
 #Formats and prints the selections made
