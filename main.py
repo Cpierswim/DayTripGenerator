@@ -66,14 +66,30 @@ restaurants = get_restaurants_list()
 transporation_modes = get_transportation_modes_list()
 entertainments = get_entertainment_list()
 
+#Formats and prints the selections provided
 satisfied_with_selections = False
-while(not satisfied_with_selections):
-    destination = select_random_from_list(destinations)
-    restaurant = select_random_from_list(restaurants)
-    transportation_mode = select_random_from_list(transporation_modes)
-    entertainment = select_random_from_list(entertainments)
+destination = select_random_from_list(destinations)
+restaurant = select_random_from_list(restaurants)
+transportation_mode = select_random_from_list(transporation_modes)
+entertainment = select_random_from_list(entertainments)
 
+while(not satisfied_with_selections):
+    
     print_selections(destination, restaurant, transportation_mode, entertainment)
-    selection = input("Are you satisfied with your trip? Y or N: ") #Assuming nother other than Y or N will be entered
+    selection = input("Are you satisfied with your trip? Y or N: ") 
     if selection == "Y":
         satisfied_with_selections = True
+    elif selection == "N":
+        selection = input("Which option would you like to change? Destination, Restaurant, Entertainment, Transportation: ")
+        if selection == "Destination":
+            destination = select_random_from_list(destinations)
+        elif selection == "Restaurant":
+            restaurant = select_random_from_list(restaurants)
+        elif selection == "Entertainment":
+            entertainment = select_random_from_list(entertainments)
+        elif selection == "Transportation":
+            transportation_mode = select_random_from_list(transporation_modes)
+        else:
+            print("Input misunderstood")
+    else:
+        print("Input misunderstood")
