@@ -68,10 +68,6 @@ def print_selections(destination, restaurant, transportation_mode, entertainment
     print(f"Entertainment: {entertainment}")
     print(f"Transportation: {transportation_mode}")
 
-#Determines if there is more than 1 thing to pick from
-def is_multiple_selections_left(list_to_check):
-    return len(list_to_check) > 1 
-
 #Determines if there is only 1 option to pick from and displays a message if there is
 def determine_if_no_more_options(list_to_check, option_string):
     if len(list_to_check) == 1:
@@ -80,46 +76,53 @@ def determine_if_no_more_options(list_to_check, option_string):
     else:
         return False
 
+#Get the selections that the user wants
+#  - supply the lists to pick from and references to where to put the selections
+def get_desired_selections(destinations_list, restaurant_list, transportation_mode_list, entertainment_list):
+    satisfied_with_selections = False
+
+    desired_destination = select_random_from_list(destinations_list)
+    desired_restaurant = select_random_from_list(restaurant_list)
+    desired_transportation_mode = select_random_from_list(transportation_mode_list)
+    desired_entertainment = select_random_from_list(entertainment_list)
+    while (not satisfied_with_selections):
+
+        print_selections(desired_destination, desired_restaurant, desired_transportation_mode, desired_entertainment)
+        selection = input("Are you satisfied with your trip? Y or N: ")
+        if selection == "Y":
+            satisfied_with_selections = True
+        elif selection == "N":
+            selection = input("Which option would you like to change? Destination, Restaurant, Entertainment, Transportation: ")
+            if selection == "Destination":
+                desired_destination = select_random_from_list(destinations_list)
+                determine_if_no_more_options(destinations_list, selection)
+            elif selection == "Restaurant":
+                desired_restaurant = select_random_from_list(restaurant_list)
+                determine_if_no_more_options(restaurant_list, selection)
+            elif selection == "Entertainment":
+                desired_entertainment = select_random_from_list(entertainment_list)
+                determine_if_no_more_options(entertainment_list, selection)
+            elif selection == "Transportation":
+                desired_transportation_mode = select_random_from_list(transportation_mode_list)
+                determine_if_no_more_options(transportation_mode_list, selection)
+            else:
+                print("Input misunderstood")
+        else:
+            print("Input misunderstood")
+
+    print_final_selctions(desired_destination, desired_restaurant, desired_transportation_mode, desired_entertainment)
+
+# Print the final selection message
+def print_final_selctions(destination, restaurant, transportation_mode, entertainment):
+    print("")
+    print("Here is your final trip!")
+    print_selections(destination, restaurant, transportation_mode, entertainment)
+
 # Begin main program execution
 destinations = get_destinations_list()
 restaurants = get_restaurants_list()
 transporation_modes = get_transportation_modes_list()
 entertainments = get_entertainment_list()
 
-satisfied_with_selections = False
+get_desired_selections(destinations, restaurants, transporation_modes, entertainments)
 
-destination = select_random_from_list(destinations)
-restaurant = select_random_from_list(restaurants)
-transportation_mode = select_random_from_list(transporation_modes)
-entertainment = select_random_from_list(entertainments)
-
-
-while (not satisfied_with_selections):
-
-    print_selections(destination, restaurant, transportation_mode, entertainment)
-    selection = input("Are you satisfied with your trip? Y or N: ")
-    if selection == "Y":
-        satisfied_with_selections = True
-    elif selection == "N":
-        selection = input(
-            "Which option would you like to change? Destination, Restaurant, Entertainment, Transportation: ")
-        if selection == "Destination":
-            destination = select_random_from_list(destinations)
-            determine_if_no_more_options(destination, selection)
-        elif selection == "Restaurant":
-            restaurant = select_random_from_list(restaurants)
-            determine_if_no_more_options(restaurant, selection)
-        elif selection == "Entertainment":
-            entertainment = select_random_from_list(entertainments)
-            determine_if_no_more_options(entertainments, selection)
-        elif selection == "Transportation":
-            transportation_mode = select_random_from_list(transporation_modes)
-            determine_if_no_more_options(transporation_modes, selection)
-        else:
-            print("Input misunderstood")
-    else:
-        print("Input misunderstood")
-
-print("")
-print("Here is your final trip!")
-print_selections(destination, restaurant, transportation_mode, entertainment)
