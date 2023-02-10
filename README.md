@@ -1,2 +1,2 @@
 # DayTripGenerator
-First project in devCodeCamp
+First project in devCodeCamp.
