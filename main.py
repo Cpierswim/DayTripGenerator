@@ -71,7 +71,7 @@ def print_selections(destination, restaurant, transportation_mode, entertainment
 #Determines if there is only 1 option to pick from and displays a message if there is
 def determine_if_no_more_options(list_to_check, option_string):
     if len(list_to_check) == 1:
-        print(f"There are no more {option_string}s left to pick from")
+        print(f"There are no more {option_string}s left to pick from. The the options will start over.")
         return True
     else:
         return False
@@ -95,16 +95,20 @@ def get_desired_selections(destinations_list, restaurant_list, transportation_mo
             selection = input("Which option would you like to change? Destination, Restaurant, Entertainment, Transportation: ")
             if selection == "Destination":
                 desired_destination = select_random_from_list(destinations_list)
-                determine_if_no_more_options(destinations_list, selection)
+                if(determine_if_no_more_options(destinations_list, selection)):
+                    destinations_list = get_destinations_list()
             elif selection == "Restaurant":
                 desired_restaurant = select_random_from_list(restaurant_list)
-                determine_if_no_more_options(restaurant_list, selection)
+                if(determine_if_no_more_options(restaurant_list, selection)):
+                    restaurant_list = get_restaurants_list()
             elif selection == "Entertainment":
                 desired_entertainment = select_random_from_list(entertainment_list)
-                determine_if_no_more_options(entertainment_list, selection)
+                if(determine_if_no_more_options(entertainment_list, selection)):
+                    entertainment_list = get_entertainment_list()
             elif selection == "Transportation":
                 desired_transportation_mode = select_random_from_list(transportation_mode_list)
-                determine_if_no_more_options(transportation_mode_list, selection)
+                if(determine_if_no_more_options(transportation_mode_list, selection)):
+                    transportation_mode_list = get_transportation_modes_list()
             else:
                 print("Input misunderstood")
         else:
