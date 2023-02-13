@@ -93,19 +93,19 @@ def get_desired_selections(destinations_list, restaurant_list, transportation_mo
             satisfied_with_selections = True
         elif selection == "N":
             selection = input("Which option would you like to change? Destination, Restaurant, Entertainment, Transportation: ")
-            if selection == "Destination":
+            if "Destination" in selection:
                 desired_destination = select_random_from_list(destinations_list)
                 if(determine_if_no_more_options(destinations_list, selection)):
                     destinations_list = get_destinations_list()
-            elif selection == "Restaurant":
+            elif "Restaurant" in selection:
                 desired_restaurant = select_random_from_list(restaurant_list)
                 if(determine_if_no_more_options(restaurant_list, selection)):
                     restaurant_list = get_restaurants_list()
-            elif selection == "Entertainment":
+            elif "Entertainment" in selection:
                 desired_entertainment = select_random_from_list(entertainment_list)
                 if(determine_if_no_more_options(entertainment_list, selection)):
                     entertainment_list = get_entertainment_list()
-            elif selection == "Transportation":
+            elif "Transportation" in selection:
                 desired_transportation_mode = select_random_from_list(transportation_mode_list)
                 if(determine_if_no_more_options(transportation_mode_list, selection)):
                     transportation_mode_list = get_transportation_modes_list()
