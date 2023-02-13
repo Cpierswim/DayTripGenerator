@@ -89,27 +89,36 @@ def get_desired_selections(destinations_list, restaurant_list, transportation_mo
 
         print_selections(desired_destination, desired_restaurant, desired_transportation_mode, desired_entertainment)
         selection = input("Are you satisfied with your trip? Y or N: ")
-        if selection == "Y":
+        selection = selection.lower()
+        if selection == "y":
             satisfied_with_selections = True
-        elif selection == "N":
-            selection = input("Which option would you like to change? Destination, Restaurant, Entertainment, Transportation: ")
-            if "Destination" in selection:
+        elif selection == "n":
+            selection = input("Which options would you like to change? Destination, Restaurant, Entertainment, Transportation: ")
+            selection = selection.lower()
+            something_changed = False
+            if "all" in selection:
+                selection = "destination, restaurant, entertainment, transportation"
+            if "destination" in selection:
                 desired_destination = select_random_from_list(destinations_list)
+                something_changed = True
                 if(determine_if_no_more_options(destinations_list, selection)):
                     destinations_list = get_destinations_list()
-            elif "Restaurant" in selection:
+            if "restaurant" in selection:
                 desired_restaurant = select_random_from_list(restaurant_list)
+                something_changed = True
                 if(determine_if_no_more_options(restaurant_list, selection)):
                     restaurant_list = get_restaurants_list()
-            elif "Entertainment" in selection:
+            if "entertainment" in selection:
                 desired_entertainment = select_random_from_list(entertainment_list)
+                something_changed = True
                 if(determine_if_no_more_options(entertainment_list, selection)):
                     entertainment_list = get_entertainment_list()
-            elif "Transportation" in selection:
+            if "transportation" in selection:
                 desired_transportation_mode = select_random_from_list(transportation_mode_list)
+                something_changed = True
                 if(determine_if_no_more_options(transportation_mode_list, selection)):
                     transportation_mode_list = get_transportation_modes_list()
-            else:
+            if not something_changed:
                 print("Input misunderstood")
         else:
             print("Input misunderstood")
